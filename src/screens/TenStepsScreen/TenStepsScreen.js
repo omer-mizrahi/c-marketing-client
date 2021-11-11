@@ -1,4 +1,5 @@
 import React from "react";
+import PurchaseForm from "../../components/PurchaseForm/PurchaseForm";
 import styles from "./tenStepsScreen.module.scss";
 
 function TenStepsScreen() {
@@ -55,44 +56,7 @@ function TenStepsScreen() {
         <br />
         <p style={{ fontWeight: 500 }}>יאלה, שנתחיל צעד ראשון?</p>
       </div>
-      {/* {!openForm && (
-          <button className={styles.wantBtn} onClick={() => setOpenForm(true)}>
-            כן אני רוצה!
-          </button>
-        )}
-        {openForm && (
-          <form className={styles.formtenSteps} onSubmit={(e) => addOrder(e)}>
-            <h2>כמה פרטים אחרונים והמדריך אצלך</h2>
-            {must && <h5>*עלייך למלא את השדות שמסומנים בכוכבית*</h5>}
-            <div className={styles.formContent}>
-              <div className={styles.divFiled}>
-                <label>*שם</label>
-                <input
-                  className={must ? styles.must : ""}
-                  onChange={(e) => setUserName(e.target.value)}
-                  type="string"
-                  name="userName"
-                  value={userName}
-                  placeholder="שם"
-                />
-              </div>
-              <div className={styles.divFiled}>
-                <label>*מייל</label>
-                <input
-                  className={must ? styles.must : ""}
-                  onChange={(e) => setEmail(e.target.value)}
-                  type="string"
-                  name="email"
-                  value={email}
-                  placeholder="מייל"
-                />
-              </div>
-              <button type="submit" className={styles.payBtn}>
-                לחץ לרכישה
-              </button>
-            </div>
-          </form>
-        )} */}
+      <PurchaseForm price={105} productName="מדריך עשרה צעדים" />
     </div>
   );
 }
