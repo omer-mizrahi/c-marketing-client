@@ -11,16 +11,24 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 
 function Menu() {
   const [active, setActive] = useState(data[0].name);
+
   return (
     <div className={styles.menu}>
+      {/* <div className={styles.instagramTag}>Instagram</div>
+      <div className={styles.whatsAppTag}>WhatsApp</div> */}
       <div className={styles.cardBrand}>
+        {/* <div className={styles.digitalLinks_mobileState}>
+          <WhatsAppIcon className={styles.whatsAppIcon} />
+          <InstagramIcon className={styles.instagramIcon} />
+        </div> */}
         <img src={logo} />
       </div>
       <div className={styles.menuCenter}>
         <ul>
           {data.map((product) => (
             <div
-              className={`${styles.divLi} ${
+              className={`${styles.divLi}
+               ${!product.isOpen ? styles.disabled : ""} ${
                 active === product.name ? styles.active : ""
               }`}
               // onClick={() => setActive(product.name)}
@@ -32,7 +40,11 @@ function Menu() {
               ) : (
                 <LockIcon />
               )}
-              <li className={active === product.name ? styles.active : ""}>
+              <li
+                className={` ${!product.isOpen ? styles.disabled : ""} ${
+                  active === product.name ? styles.active : ""
+                }`}
+              >
                 {product.name}
               </li>
             </div>

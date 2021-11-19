@@ -10,18 +10,24 @@ form {
     color: #1d1d1e;
     text-align: center;
   }
+
   .formContent {
     display: flex;
     align-items: center;
     padding: 10px;
     justify-content: space-between;
+
+
+
     .divFiled {
       display: flex;
       align-items: center;
+
       label {
         margin-left: 5px;
         color: black;
       }
+
       input {
         border: none;
         outline: none;
@@ -32,10 +38,11 @@ form {
         border-bottom: 1px solid #525252;
         border-bottom-right-radius: 0;
         border-bottom-left-radius: 0;
-        // color: white;
         font-size: 16px;
       }
+
     }
+
     button {
       border: none;
       background-color: #3599ff;
@@ -47,8 +54,30 @@ form {
       font-weight: 600;
       cursor: pointer;
     }
+
     .must {
       border-bottom: 1px solid #d53636;
+    }
+  }
+
+
+  @media screen and (max-width: 750px) {
+    margin: 1rem 0;
+
+    h5 {
+      margin-top: 10px;
+    }
+
+    .formContent {
+      flex-direction: column;
+
+      .divFiled {
+        margin: 10px 0;
+      }
+
+      button {
+        margin-top: 1rem;
+      }
     }
   }
 }
