@@ -20,10 +20,7 @@ function PurchaseForm({ submitFunc, price, productName }) {
         price: price,
       };
 
-      const { data } = await axios.post(
-        `http://localhost:5000/api/orders`,
-        newOrder
-      );
+      const { data } = await axios.post(`/api/orders`, newOrder);
       console.log("data R", data);
       setMust(false);
     }
