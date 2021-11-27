@@ -11,13 +11,25 @@ form {
     text-align: center;
   }
 
+  .must {
+    color: red;
+    font-size: 12px;
+    text-align: center;
+  }
+
+  .priceNote {
+    color: #3599fe;
+    text-align: center;
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
   .formContent {
     display: flex;
     align-items: center;
     padding: 10px;
     justify-content: space-between;
-
-
 
     .divFiled {
       display: flex;

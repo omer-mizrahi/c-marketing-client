@@ -14,13 +14,7 @@ function Menu() {
 
   return (
     <div className={styles.menu}>
-      {/* <div className={styles.instagramTag}>Instagram</div>
-      <div className={styles.whatsAppTag}>WhatsApp</div> */}
       <div className={styles.cardBrand}>
-        {/* <div className={styles.digitalLinks_mobileState}>
-          <WhatsAppIcon className={styles.whatsAppIcon} />
-          <InstagramIcon className={styles.instagramIcon} />
-        </div> */}
         <img src={logo} />
       </div>
       <div className={styles.menuCenter}>
@@ -50,9 +44,18 @@ function Menu() {
             </div>
           ))}
         </ul>
+        <h3 className={styles.titleSocial}>Social Media</h3>
         <div className={styles.digitalLinks}>
-          <WhatsAppIcon className={styles.whatsAppIcon} />
-          <InstagramIcon className={styles.instagramIcon} />
+          <a href="https://wa.me/972502300992" target="_blank" rel="noReferrer">
+            <WhatsAppIcon className={styles.whatsAppIcon} />
+          </a>
+          <a
+            href="https://www.instagram.com/srolikcohen/"
+            target="_blank"
+            rel="noReferrer"
+          >
+            <InstagramIcon className={styles.instagramIcon} />
+          </a>
         </div>
       </div>
     </div>
