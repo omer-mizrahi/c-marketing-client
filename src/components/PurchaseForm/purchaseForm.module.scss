@@ -7,7 +7,8 @@ form {
 
   h5 {
     font-size: 20px;
-    color: #1d1d1e;
+    // color: #1d1d1e;
+    color: #353434;
     text-align: center;
   }
 
@@ -27,48 +28,85 @@ form {
 
   .formContent {
     display: flex;
-    align-items: center;
+    // align-items: center;
     padding: 10px;
-    justify-content: space-between;
+    // justify-content: space-around;
+
+    .fields {
+      padding: 1rem;
+      padding-bottom: 0;
+      max-width: 70%;
+      min-width: 50%;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 10px 20px #4d4c4c26;
+    }
 
     .divFiled {
       display: flex;
       align-items: center;
+      margin-bottom: 15px;
 
       label {
         margin-left: 5px;
-        color: black;
+        color: #3f3f3f;
+        width: 70px;
+        text-align: center;
       }
 
       input {
         border: none;
         outline: none;
-        height: 32px;
+        height: 38px;
         border-radius: 10px;
-        padding: 0 5px;
-        background-color: transparent;
-        border-bottom: 1px solid #525252;
-        border-bottom-right-radius: 0;
-        border-bottom-left-radius: 0;
+        padding: 0 15px;
         font-size: 16px;
+        background-color: #f2f5f9;
+        width: 100%;
       }
 
     }
+
+
+
+    .must {
+      border-bottom: 1px solid #d53636;
+    }
+
+    .bit_iframe {
+      z-index: 100;
+      width: 100%;
+      height: 100%;
+      position: fixed;
+      border: 0;
+      top: 0;
+      right: 0;
+      background-color: transparent !important;
+    }
+
+  }
+
+  .payButtons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    // max-width: 50%;
+    min-width: 50%;
+    padding: 1rem 0;
+
 
     button {
       border: none;
       background-color: #3599ff;
       color: white;
-      padding: 10px;
+      padding: 15px;
       border-radius: 10px;
-      min-width: 120px;
+      min-width: 70%;
+      max-width: 100%;
       font-size: 16px;
       font-weight: 600;
       cursor: pointer;
-    }
-
-    .must {
-      border-bottom: 1px solid #d53636;
+      margin: 10px 0;
     }
   }
 
@@ -83,13 +121,29 @@ form {
     .formContent {
       flex-direction: column;
 
+      .fields {
+        max-width: 100%;
+        margin-bottom: 10px;
+        padding: 10px 20px;
+        // padding-bottom: 0; 
+      }
+
       .divFiled {
         margin: 10px 0;
       }
 
-      button {
-        margin-top: 1rem;
+      .payButtons {
+        max-width: 100%;
+        flex-direction: row;
+        justify-content: space-around;
+        padding: 0;
+
+        button {
+          margin-top: 1rem;
+          min-width: calc(50% - 5%);
+        }
       }
+
     }
   }
 }

@@ -3,6 +3,7 @@ import Menu from "../Menu/Menu";
 import styles from "./app.module.scss";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import InstagramIcon from "@mui/icons-material/Instagram";
+import ThankYouScreen from "../../screens/ThankYouScreen/ThankYouScreen";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <InstagramIcon className={styles.instagramIcon} />
         </a>
       </div>
+      {/* <ThankYouScreen /> */}
     </div>
   );
 }

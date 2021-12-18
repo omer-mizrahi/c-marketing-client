@@ -56,7 +56,7 @@ function TenStepsScreen() {
         <br />
         <p style={{ fontWeight: 500 }}>יאלה, שנתחיל צעד ראשון?</p>
       </div>
-      <PurchaseForm price={105} productName="מדריך עשרה צעדים" />
+      <PurchaseForm price={199} productName="מדריך עשרה צעדים" />
     </div>
   );
 }
