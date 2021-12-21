@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./purchaseForm.module.scss";
 import axios from "axios";
 import { processPayment } from "../../actions/paymentActions";
@@ -11,7 +11,11 @@ function PurchaseForm({ submitFunc, price, productName }) {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [must, setMust] = useState("");
+  const [error, setError] = useState("");
+  const [currentData, setCurrentData] = useState({});
+  const [currentPageCode, setCurrentPageCode] = useState("");
   const dispatch = useDispatch();
+
   // const [iframePayment, setIframePayment] = useState();
 
   // const window = new JSDOM("").window;
@@ -23,13 +27,48 @@ function PurchaseForm({ submitFunc, price, productName }) {
   // </div>
   // `;
 
-  const addOrder = async (e) => {
-    e.preventDefault();
-    const data = await axios.post(`/api/createPayment`);
+  const addOrder = async (e, paymentType) => {
+    console.log("paymentType", paymentType);
 
-    console.log("data", data);
-    console.log("done!");
-    return data;
+    e.preventDefault();
+    const pageCodeForBit = "dc92d4ae39e5";
+    const pageCodeForCard = "b4e13ad16072";
+    setCurrentPageCode(
+      paymentType === "bit" ? pageCodeForBit : pageCodeForCard
+    );
+
+    if (!userName || !email || !phone || !price) {
+      setError("יש למלא את כל השדות");
+    } else {
+      const { data } = await axios.post(`/api/createPayment`, {
+        pageCode: paymentType === "bit" ? pageCodeForBit : pageCodeForCard,
+        fullName: userName,
+        email,
+        phone,
+        sum: price,
+      });
+      console.log("data", data);
+      console.log("done!");
+      setCurrentData(data);
+      return data;
+    }
+  };
+
+  useEffect(() => {
+    if (Object.keys(currentData).length) {
+      console.log("here");
+      approvePaymentHandler();
+    }
+  }, [currentData]);
+
+  const approvePaymentHandler = async () => {
+    const result = await axios.post(`/api/approvePayment`, {
+      pageCode: currentPageCode,
+      processId: currentData.data.processId,
+      processToken: currentData.data.processToken,
+      paymentSum: price,
+    });
+    return result;
   };
 
   // const addOrder = async (e) => {
@@ -63,7 +102,7 @@ function PurchaseForm({ submitFunc, price, productName }) {
 
   return (
     <>
-      <form className={styles.formtenSteps} onSubmit={(e) => addOrder(e)}>
+      <form className={styles.formtenSteps}>
         <h5>מלא פרטים לרכישת המדריך</h5>
         {must && (
           <h5 className={styles.must}>
@@ -106,12 +145,12 @@ function PurchaseForm({ submitFunc, price, productName }) {
           </div>
 
           <div className={styles.payButtons}>
-            <button type="submit" className={styles.payBtn}>
+            <div onClick={(e) => addOrder(e, "bit")} className={styles.payBtn}>
               Bit
-            </button>
-            <button type="submit" className={styles.payBtn}>
+            </div>
+            <div onClick={(e) => addOrder(e, "card")} className={styles.payBtn}>
               אשראי
-            </button>
+            </div>
           </div>
         </div>
       </form>

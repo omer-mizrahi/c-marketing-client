@@ -95,7 +95,7 @@ form {
     padding: 1rem 0;
 
 
-    button {
+    .payBtn {
       border: none;
       background-color: #3599ff;
       color: white;
@@ -107,6 +107,10 @@ form {
       font-weight: 600;
       cursor: pointer;
       margin: 10px 0;
+      text-align: center;
+      appearance: auto;
+      box-sizing: border-box;
+      display: inline-block;
     }
   }
 
@@ -138,7 +142,7 @@ form {
         justify-content: space-around;
         padding: 0;
 
-        button {
+        .payBtn {
           margin-top: 1rem;
           min-width: calc(50% - 5%);
         }
