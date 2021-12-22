@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import styles from "./purchaseForm.module.scss";
-import axios from "axios";
 import { processPayment } from "../../actions/paymentActions";
 import { useDispatch } from "react-redux";
-import createDOMPurify from "dompurify";
-import { JSDOM } from "jsdom";
+import { useNavigate } from "react-router";
+import { useSelector } from "react-redux";
 
 function PurchaseForm({ submitFunc, price, productName }) {
+  const { currentPayment } = useSelector((state) => state.paymentState);
+
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -15,17 +16,7 @@ function PurchaseForm({ submitFunc, price, productName }) {
   const [currentData, setCurrentData] = useState({});
   const [currentPageCode, setCurrentPageCode] = useState("");
   const dispatch = useDispatch();
-
-  // const [iframePayment, setIframePayment] = useState();
-
-  // const window = new JSDOM("").window;
-  // const DOMPurify = createDOMPurify(window);
-
-  // const rawHTML = `
-  // <div class="dropdown">
-  // <h1>Test omer</h1>
-  // </div>
-  // `;
+  const navigate = useNavigate();
 
   const addOrder = async (e, paymentType) => {
     console.log("paymentType", paymentType);
@@ -40,36 +31,43 @@ function PurchaseForm({ submitFunc, price, productName }) {
     if (!userName || !email || !phone || !price) {
       setError("יש למלא את כל השדות");
     } else {
-      const { data } = await axios.post(`/api/createPayment`, {
+      const bodyData = {
         pageCode: paymentType === "bit" ? pageCodeForBit : pageCodeForCard,
         fullName: userName,
         email,
         phone,
         sum: price,
-      });
-      console.log("data", data);
-      console.log("done!");
-      setCurrentData(data);
-      return data;
+      };
+      dispatch(processPayment(bodyData));
     }
   };
 
   useEffect(() => {
-    if (Object.keys(currentData).length) {
-      console.log("here");
-      approvePaymentHandler();
+    if (Object.keys(currentPayment).length) {
+      navigate("payment");
     }
-  }, [currentData]);
+  }, [currentPayment]);
 
-  const approvePaymentHandler = async () => {
-    const result = await axios.post(`/api/approvePayment`, {
-      pageCode: currentPageCode,
-      processId: currentData.data.processId,
-      processToken: currentData.data.processToken,
-      paymentSum: price,
-    });
-    return result;
-  };
+  /* start: approve */
+
+  // useEffect(() => {
+  //   if (Object.keys(currentData).length) {
+  //     console.log("here");
+  //     approvePaymentHandler();
+  //   }
+  // }, [currentData]);
+
+  // const approvePaymentHandler = async () => {
+  //   const result = await axios.post(`/api/approvePayment`, {
+  //     pageCode: currentPageCode,
+  //     processId: currentData.data.processId,
+  //     processToken: currentData.data.processToken,
+  //     paymentSum: price,
+  //   });
+  //   return result;
+  // };
+
+  /* end: approve */
 
   // const addOrder = async (e) => {
   //   e.preventDefault();
@@ -154,13 +152,6 @@ function PurchaseForm({ submitFunc, price, productName }) {
           </div>
         </div>
       </form>
-      {/* <div>
-        {
-          <div
-            dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(rawHTML) }}
-          />
-        }
-      </div> */}
     </>
   );
 }

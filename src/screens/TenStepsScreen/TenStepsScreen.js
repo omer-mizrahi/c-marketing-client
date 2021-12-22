@@ -1,8 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { saveProductData } from "../../actions/productActions";
 import PurchaseForm from "../../components/PurchaseForm/PurchaseForm";
 import styles from "./tenStepsScreen.module.scss";
 
 function TenStepsScreen() {
+  const dispatch = useDispatch();
+  const productName = "מדריך 10 צעדים";
+  const price = 199;
+
+  const productDataHandler = () => {
+    const data = { productName, price };
+    dispatch(saveProductData(data));
+  };
+
+  useEffect(() => {
+    productDataHandler();
+  }, []);
+
   return (
     <div className={styles.tenStepsScreen}>
       <h2>מדריך 10 צעדים - הקדמה</h2>
